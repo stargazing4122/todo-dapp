@@ -1,10 +1,9 @@
 import React from 'react'
+import AppRouter from './routers/AppRouter'
 
 const TodoApp = () => {
   return (
-    <div>
-      hello dapp
-    </div>
+    <AppRouter />
   )
 }
 
