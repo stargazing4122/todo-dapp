@@ -44,3 +44,17 @@ export const startRegisterWithEmailPasswordName = ( email, password, name) => {
       })
   }
 }
+
+export const startLoginEmailPassword = (email, password) => {
+  return ( dispatch) => {
+    auth.signInWithEmailAndPassword( email, password )
+      .then( ({ user }) => {
+        dispatch(authLogin(user.uid, user.displayName));
+        Swal.fire('Sesión iniciada', 'Credenciales correctas', 'success');
+      })
+      .catch( e => {
+        console.log(e);
+        Swal.fire('Error', e.message, 'error');
+      });
+  }
+}

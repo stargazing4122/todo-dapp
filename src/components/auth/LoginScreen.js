@@ -1,19 +1,34 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { startGoogleLogin } from '../../actions/authActions';
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/authActions';
+import useForm from '../../hooks/useForm';
+import { isFormValidOnLogin } from '../../utils/isFormValidOnLogin';
 
 const LoginScreen = () => {
+  const initialForm = {
+    email: 'pedro@gmail.com',
+    password: '123456',
+  }
   //hooks
   const dispatch = useDispatch();
+  const {formValues, handleInput} = useForm(initialForm);
+  const {email, password} = formValues;
 
   //functions
   const handleGoogleLogin = () => {
     dispatch(startGoogleLogin());
   }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if(isFormValidOnLogin(email, password)){
+      dispatch(startLoginEmailPassword( email, password));
+    }
+  }
   return (
     <>
-    <form className="auth-form">
+    <form className="auth-form" onSubmit={handleLogin}>
       <span className="auth-form__icon">
         <i className="fa-solid fa-user-lock"></i>
       </span>
@@ -23,11 +38,17 @@ const LoginScreen = () => {
         type="text" 
         placeholder="Email" 
         className="auth-form__input"
+        name="email"
+        value={email}
+        onChange={handleInput}
       />
       <input 
         type="password" 
         placeholder="Password" 
         className="auth-form__input"
+        name="password"
+        value={password}
+        onChange={handleInput}
       />
       <button 
         type="submit"
