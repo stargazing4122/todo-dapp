@@ -1,5 +1,7 @@
 import { types } from "../types/types";
-import {auth, googleAuthProvider} from '../firebase/config';  
+import {auth, googleAuthProvider} from '../firebase/config'; 
+import Swal from "sweetalert2";
+
 /* SYNCHRONOUS ACTIONS */
 const authLogin = (uid, name) => ({
   type: types.authLogin,
@@ -23,6 +25,22 @@ export const startGoogleLogin = () => {
       })
       .catch(e => {
         console.log(e);
+        Swal.fire('Error', e.message, 'error');
       })
   }
 } 
+
+export const startRegisterWithEmailPasswordName = ( email, password, name) => {
+  return ( dispatch ) => {
+    auth.createUserWithEmailAndPassword( email, password)
+      .then ( async({ user })=> {
+        await user.updateProfile({ displayName: name});
+        dispatch(authLogin(user.uid, user.displayName));
+        Swal.fire('Registro exitoso', 'Sesión iniciada', 'success');
+      })
+      .catch( e => {
+        console.log(e);
+        Swal.fire('Error', e.message, 'error');
+      })
+  }
+}
