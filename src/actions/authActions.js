@@ -1,7 +1,7 @@
 import { types } from "../types/types";
-
+import {auth, googleAuthProvider} from '../firebase/config';  
 /* SYNCHRONOUS ACTIONS */
-export const authLogin = (uid, name) => ({
+const authLogin = (uid, name) => ({
   type: types.authLogin,
   payload: {
     uid,
@@ -9,6 +9,20 @@ export const authLogin = (uid, name) => ({
   }
 });
 
-export const authLogout = () => ({
+const authLogout = () => ({
   type: types.authLogout,
 })
+
+/* ASYNCHRONOUS ACTIONS */
+
+export const startGoogleLogin = () => {
+  return ( dispatch ) => {
+    auth.signInWithPopup(googleAuthProvider)
+      .then( ({ user }) => {
+        dispatch(authLogin(user.uid, user.displayName));
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }
+} 
