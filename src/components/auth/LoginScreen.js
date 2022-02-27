@@ -6,13 +6,13 @@ const LoginScreen = () => {
     <>
     <form className="auth-form">
       <span className="auth-form__icon">
-        <i className="fa-solid fa-user-large"></i>
+        <i class="fa-solid fa-user-lock"></i>
       </span>
       
       <h3 className="auth-form__title">LOGIN</h3>
       <input 
         type="text" 
-        placeholder="Username o email" 
+        placeholder="Email" 
         className="auth-form__input"
       />
       <input 
