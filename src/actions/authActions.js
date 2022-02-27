@@ -3,7 +3,7 @@ import {auth, googleAuthProvider} from '../firebase/config';
 import Swal from "sweetalert2";
 
 /* SYNCHRONOUS ACTIONS */
-const authLogin = (uid, name) => ({
+export const authLogin = (uid, name) => ({
   type: types.authLogin,
   payload: {
     uid,
