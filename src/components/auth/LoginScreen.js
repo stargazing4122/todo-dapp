@@ -55,7 +55,13 @@ const LoginScreen = () => {
         type="submit"
         className="btn btn--secondary"
         disabled={loading}
-      >Login Now
+      >
+        {
+          !loading
+            ? 'Login Now'
+            : 'Cargando...'
+        }
+        
       </button>
 
       <div 
