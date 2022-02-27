@@ -1,18 +1,23 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../actions/authActions';
 
 const TodoScreen = () => {
-  const style = {
-    color: 'azure',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100vh',
-    justifyContent: 'center',
-    alignItems: 'center',
+  //hooks
+  const dispatch = useDispatch();
+
+  //functions
+  const handleLogout = () => {
+    dispatch(startLogout());
   }
+  
   return (
-    <div style={style}>  
+    <div className="todo-main">  
       <h2>Pagina en construcción...</h2>
-      <button className='btn btn-logout'>Logout</button>
+      <button 
+        className='btn btn-logout'
+        onClick={handleLogout}
+        >Logout</button>
     </div>
   )
 }

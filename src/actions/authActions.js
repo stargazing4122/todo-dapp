@@ -30,6 +30,20 @@ export const startGoogleLogin = () => {
   }
 } 
 
+export const startLoginEmailPassword = (email, password) => {
+  return ( dispatch) => {
+    auth.signInWithEmailAndPassword( email, password )
+      .then( ({ user }) => {
+        dispatch(authLogin(user.uid, user.displayName));
+        Swal.fire('Sesión iniciada', 'Credenciales correctas', 'success');
+      })
+      .catch( e => {
+        console.log(e);
+        Swal.fire('Error', e.message, 'error');
+      });
+  }
+}
+
 export const startRegisterWithEmailPasswordName = ( email, password, name) => {
   return ( dispatch ) => {
     auth.createUserWithEmailAndPassword( email, password)
@@ -45,16 +59,15 @@ export const startRegisterWithEmailPasswordName = ( email, password, name) => {
   }
 }
 
-export const startLoginEmailPassword = (email, password) => {
-  return ( dispatch) => {
-    auth.signInWithEmailAndPassword( email, password )
-      .then( ({ user }) => {
-        dispatch(authLogin(user.uid, user.displayName));
-        Swal.fire('Sesión iniciada', 'Credenciales correctas', 'success');
+export const startLogout = () => {
+  return ( dispatch ) => {
+    auth.signOut()
+      .then( () => {
+        dispatch( authLogout() );
       })
-      .catch( e => {
+      .catch(e => {
         console.log(e);
         Swal.fire('Error', e.message, 'error');
-      });
+      })
   }
 }
