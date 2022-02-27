@@ -1,18 +1,18 @@
 //auth
 .btn{
-    width: 100%;
     padding: 10px 20px;
     border-radius: 22px;
     margin-bottom: 8px;
     font-size: 14px;
     border: none;
+    cursor: pointer;
 } 
 
 .btn--secondary {
+    width: 100%;
     background-color: $secondary;
     color: $white;
     outline: none;
-    cursor: pointer;
 
     &:hover  {
         box-shadow: 1px 1px 5px $secondary;
@@ -23,6 +23,19 @@
     &:disabled {
         background-color: lighten($color: $secondary, $amount: 20);
         cursor: default;
+    }
+}
+
+.btn-logout {
+    background-color: $primary;
+    font-weight: bolder;
+
+    &:hover {
+        box-shadow: 1px 1px 5px $primary;
+    }
+
+    &:focus {
+        background-color: darken($color: $primary, $amount: 10);
     }
 }
 
