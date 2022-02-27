@@ -6,7 +6,7 @@ const LoginScreen = () => {
     <>
     <form className="auth-form">
       <span className="auth-form__icon">
-        <i class="fa-solid fa-user-lock"></i>
+        <i className="fa-solid fa-user-lock"></i>
       </span>
       
       <h3 className="auth-form__title">LOGIN</h3>

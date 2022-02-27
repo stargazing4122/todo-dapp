@@ -6,7 +6,7 @@ const RegisterScreen = () => {
     <>
     <form className="auth-form">
       <span className="auth-form__icon">
-        <i class="fa-solid fa-user-plus"></i>
+        <i className="fa-solid fa-user-plus"></i>
       </span>
       
       <h3 className="auth-form__title">REGISTER</h3>
