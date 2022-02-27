@@ -1,6 +1,7 @@
 import { types } from "../types/types";
 import {auth, googleAuthProvider} from '../firebase/config'; 
 import Swal from "sweetalert2";
+import { uiRemoveLoading, uiSetLoading } from "./uiActions";
 
 /* SYNCHRONOUS ACTIONS */
 export const authLogin = (uid, name) => ({
@@ -19,6 +20,7 @@ const authLogout = () => ({
 
 export const startGoogleLogin = () => {
   return ( dispatch ) => {
+    dispatch(uiSetLoading());
     auth.signInWithPopup(googleAuthProvider)
       .then( ({ user }) => {
         dispatch(authLogin(user.uid, user.displayName));
@@ -27,11 +29,16 @@ export const startGoogleLogin = () => {
         console.log(e);
         Swal.fire('Error', e.message, 'error');
       })
+      .finally( () => {
+        dispatch(uiRemoveLoading());
+      })
   }
 } 
 
 export const startLoginEmailPassword = (email, password) => {
   return ( dispatch) => {
+    dispatch(uiSetLoading());
+
     auth.signInWithEmailAndPassword( email, password )
       .then( ({ user }) => {
         dispatch(authLogin(user.uid, user.displayName));
@@ -40,7 +47,10 @@ export const startLoginEmailPassword = (email, password) => {
       .catch( e => {
         console.log(e);
         Swal.fire('Error', e.message, 'error');
-      });
+      })
+      .finally( () => {
+        dispatch(uiRemoveLoading());
+      })
   }
 }
 
@@ -64,6 +74,7 @@ export const startLogout = () => {
     auth.signOut()
       .then( () => {
         dispatch( authLogout() );
+        Swal.fire('Sesión cerrada', 'Logout', 'success');
       })
       .catch(e => {
         console.log(e);

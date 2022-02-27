@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
@@ -7,11 +7,12 @@ import { isFormValidOnLogin } from '../../utils/isFormValidOnLogin';
 
 const LoginScreen = () => {
   const initialForm = {
-    email: 'pedro@gmail.com',
-    password: '123456',
+    email: '',
+    password: '',
   }
   //hooks
   const dispatch = useDispatch();
+  const { loading } = useSelector( state => state.ui );
   const {formValues, handleInput} = useForm(initialForm);
   const {email, password} = formValues;
 
@@ -53,7 +54,7 @@ const LoginScreen = () => {
       <button 
         type="submit"
         className="btn btn--secondary"
-        disabled={false}
+        disabled={loading}
       >Login Now
       </button>
 

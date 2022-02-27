@@ -1,16 +1,16 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { startGoogleLogin, startRegisterWithEmailPasswordName } from '../../actions/authActions'
+import { startRegisterWithEmailPasswordName } from '../../actions/authActions'
 import useForm from '../../hooks/useForm'
 import { isFormValidRegister } from '../../utils/isFormValidOnRegister'
 
 const RegisterScreen = () => {
   const initialForm = {
-    email: 'pedro@gmail.com',
-    password: '123456',
-    password2: '123456',
-    name: 'pedro',
+    email: '',
+    password: '',
+    password2: '',
+    name: '',
   }
   //hooks
   const {formValues, handleInput} = useForm(initialForm) ;
