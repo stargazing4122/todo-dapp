@@ -10,3 +10,4 @@
   3. Redux thunk
   4. Redux devtools
   5. Proteccion de rutas
+  6. SASS
